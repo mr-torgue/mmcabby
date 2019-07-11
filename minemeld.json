@@ -1,0 +1,16 @@
+{
+    "version": "0.1",
+    "name": "minemeld-taxii-cabby",
+    "author": "Mr Torgue",
+    "author_email": "",
+    "description": "MineMeld TAXII miner using cabby",
+    "entry_points": {
+        "minemeld_nodes": {
+            "mmcabby.CabbyMM": "mmcabby.mmcabby:CabbyMM"
+        },
+        "minemeld_prototypes": {
+            "mmcabby.prototypes": "mmcabby.mmcabby:prototypes"
+        },
+    },
+    "manifest_version": 0
+}

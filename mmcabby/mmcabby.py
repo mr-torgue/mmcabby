@@ -21,7 +21,7 @@ STIX/TAXII client for MineMeld. Uses cabby library.
 Based on the default taxii and taxii-ng implementation. 
 Added support for v1.0, certificate based authentication and manual specifying the poll service.
 Cleaned up the code.
-@Author: Folmer Heikap
+@Author: mr torgue
 '''
 class CabbyMM(BasePollerFT):
     def __init__(self, name, chassis, config):
