@@ -10,7 +10,7 @@
         },
         "minemeld_prototypes": {
             "mmcabby.prototypes": "mmcabby.mmcabby:prototypes"
-        },
+        }
     },
     "manifest_version": 0
 }
