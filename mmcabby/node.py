@@ -127,7 +127,7 @@ class CabbyMM(BasePollerFT):
         LOG.info('last_taxii_run from sstate: %s', self.last_taxii_run)
 
     def _saved_state_create(self):
-        sstate = super(Miner, self)._saved_state_create()
+        sstate = super(CabbyMM, self)._saved_state_create()
         sstate['last_taxii_run'] = self.last_taxii_run
 
         return sstate
@@ -200,7 +200,7 @@ class CabbyMM(BasePollerFT):
     '''
     def _build_iterator(self, now):
         # create cabby client
-        client = create_client(host=self.host, discovery_path=self.discovery_service, port=self.port, use_https=self.use_https, version=self.version, headers=self.headers)
+        client = create_client(host=self.host, discovery_path=self.discovery_service, port=self.port, use_https=self.use_https, version=self.version)
         if self.poll_service is not None:
             discovered_poll_service = self.poll_service
         else:
