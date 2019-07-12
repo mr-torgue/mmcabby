@@ -15,7 +15,9 @@ prototypes:
             age_out:
                 sudden_death: false
                 default: last_seen+30d
-            discovery_service:  http://hailataxii.com/taxii-discovery-service
+            host: hailataxii.com
+            discovery_service: /taxii-discovery-service
             collection: guest.phishtank_com
+            use_https: False
             username: guest
             password: guest

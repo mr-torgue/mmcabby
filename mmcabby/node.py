@@ -61,6 +61,7 @@ class CabbyMM(BasePollerFT):
         self.discovery_service = self.config.get('discovery_service', None)
         self.poll_service = self.config.get('poll_service', None)
         self.collection = self.config.get('collection', None)
+        self.host = self.config.get('host', None)
 
         self.side_config_path = os.path.join(
             os.environ['MM_CONFIG_DIR'],
@@ -115,10 +116,6 @@ class CabbyMM(BasePollerFT):
             self.password = password
             LOG.info('{} - Loaded Basic authentication credentials from side config'.format(self.name))
 
-        use_https = sconfig.get('use_https', True)
-        port = sconfig.get('port', 443)
-        version = sconfig.get('version', 1.1)
-
         verify_cert = sconfig.get('verify_cert', None)
         if verify_cert is not None:
             self.verify_cert = verify_cert
@@ -154,7 +151,7 @@ class CabbyMM(BasePollerFT):
     create because this was the default behaviour
     '''
     def _discover_poll_service(self, client):
-        return = client.discover_services(service_type="SVC_POLL")[0].address
+        return client.discover_services(service_type="SVC_POLL")[0].address
 
     def _raise_for_taxii_error(self, response):
         if response.contents[0].name != 'Status_Message':
@@ -203,7 +200,7 @@ class CabbyMM(BasePollerFT):
     '''
     def _build_iterator(self, now):
         # create cabby client
-        client = create_client(url, self.discovery_service, port=self.port, use_https=self.use_https, version=self.version, headers=self.headers)
+        client = create_client(host=self.host, discovery_path=self.discovery_service, port=self.port, use_https=self.use_https, version=self.version, headers=self.headers)
         if self.poll_service is not None:
             discovered_poll_service = self.poll_service
         else:
