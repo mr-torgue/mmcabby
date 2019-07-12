@@ -87,7 +87,7 @@ class CabbyMM(BasePollerFT):
         # misc settings
         self.use_https = self.config.get('use_https', True)
         self.port = self.config.get('port', 443)
-        self.version = self.config.get('version', 1.1)
+        self.version = self.config.get('version', "1.1")
 
         self._load_side_config()
 
