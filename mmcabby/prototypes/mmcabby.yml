@@ -1,12 +1,10 @@
-description: >
-    New TAXII Miner
+description: New TAXII Miner
 url: https://github.com/mr-torgue/mmcabby.git
 
 prototypes:
-    phishtank:
+    myphishtank:
         author: Mr Torgue
-        description: >
-            Test feed from Hail A TAXII test site.
+        description: Test feed from Hail A TAXII test site.
         class: mmcabby.CabbyMM
         development_status: EXPERIMENTAL
         node_type: miner
@@ -20,4 +18,4 @@ prototypes:
             discovery_service:  http://hailataxii.com/taxii-discovery-service
             collection: guest.phishtank_com
             username: guest
-password: guest
+            password: guest
