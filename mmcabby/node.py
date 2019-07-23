@@ -153,7 +153,7 @@ class CabbyMM(BasePollerFT):
         return client.get_services(service_type="POLL")[0].address
 
     def _poll_collection(self, client, poll_service, begin, end):
-        results = client.poll(self.collection, uri=poll_service, begin=begin, end=end)
+        results = client.poll(self.collection, uri=poll_service, begin_date=begin, end_date=end)
         LOG.info('{} - polling {} from {!r} to {!r}'.format(self.name, poll_service, begin, end))
         # parse results for IOC's
         for result in results:
