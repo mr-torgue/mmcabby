@@ -151,7 +151,7 @@ class CabbyMM(BasePollerFT):
     create because this was the default behaviour
     '''
     def _discover_poll_service(self, client):
-        return client.discover_services(service_type="SVC_POLL")[0].address
+        return client.get_services(service_type="POLL")[0].address
 
     def _raise_for_taxii_error(self, response):
         if response.contents[0].name != 'Status_Message':
@@ -201,6 +201,8 @@ class CabbyMM(BasePollerFT):
     def _build_iterator(self, now):
         # create cabby client
         client = create_client(host=self.host, discovery_path=self.discovery_service, port=self.port, use_https=self.use_https, version=self.version)
+        # basic authentication
+        client.set_auth(username=self.username, password=self.password, cert_file=self.cert_file, key_file=self.key_file)
         if self.poll_service is not None:
             discovered_poll_service = self.poll_service
         else:
