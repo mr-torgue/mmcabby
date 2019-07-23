@@ -6,13 +6,12 @@ from datetime import datetime, timedelta
 import pytz
 import yaml
 import requests
-import bs4  # we use bs4 to parse the HTML page
-from lxml import etree
 
 from minemeld.ft.basepoller import BasePollerFT
 from minemeld.ft.utils import interval_in_sec
 
 from cabby import create_client 
+from .stix import decode as stix_decode
 
 LOG = logging.getLogger(__name__)
 
@@ -153,25 +152,19 @@ class CabbyMM(BasePollerFT):
     def _discover_poll_service(self, client):
         return client.get_services(service_type="POLL")[0].address
 
-
-    def _raise_for_taxii_error(self, response):
-        if response.contents[0].name != 'Status_Message':
-            return
-
-        if response.contents[0]['status_type'] == 'SUCCESS':
-            return
-
-        raise RuntimeError('{} - error returned by TAXII Server: {}'.format(
-            self.name, response.contents[0]['status_type']
-        ))
-
-
-
     def _poll_collection(self, client, poll_service, begin, end):
-        results = client.poll(self.collection, url=poll_service, begin=begin, end=end)
+        results = client.poll(self.collection, uri=poll_service, begin=begin, end=end)
         LOG.info('{} - polling {} from {!r} to {!r}'.format(self.name, poll_service, begin, end))
+        # parse results for IOC's
         for result in results:
-            LOG.info('{} - result {}'.format(self.name, result))
+            timestamp = result.timestamp
+            _, indicators = stix_decode(result.content)
+            for indicator in indicators:
+                yield indicator
+            # update last stix package
+            if self.last_stix_package_ts is None or timestamp > self.last_stix_package_ts:
+                LOG.debug('{} - last package ts: {!r}'.format(self.name, timestamp))
+                self.last_stix_package_ts = timestamp
 
 
 
@@ -227,6 +220,7 @@ class CabbyMM(BasePollerFT):
             begin = begin.replace(second=0, microsecond=0)
 
         return self._incremental_poll_collection(
+            client,
             discovered_poll_service,
             begin=begin,
             end=end
