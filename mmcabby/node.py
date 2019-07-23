@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 
 import pytz
 import yaml
-import requests
 
 from minemeld.ft.basepoller import BasePollerFT
 from minemeld.ft.utils import interval_in_sec
@@ -18,8 +17,16 @@ LOG = logging.getLogger(__name__)
 '''
 STIX/TAXII client for MineMeld. Uses cabby library. 
 Based on the default taxii and taxii-ng implementation. 
-Added support for v1.0, certificate based authentication and manual specifying the poll service.
-Cleaned up the code.
+
+IMPROVEMENTS:
+1) Uses cabby library, so no more messing around with requests. Better support.
+2) Added parameters voor cert based authentication
+3) parameters for specifying poll service manually
+4) parameters for port and version and http or https
+
+TODO:
+1) Add webui
+
 @Author: mr torgue
 '''
 class CabbyMM(BasePollerFT):
@@ -152,6 +159,10 @@ class CabbyMM(BasePollerFT):
     def _discover_poll_service(self, client):
         return client.get_services(service_type="POLL")[0].address
 
+    '''
+    polls specified collection. No more messing around with raw requests. cabby returns a list with blocks.
+    The ng stix parser can be used to collect IOC's
+    '''
     def _poll_collection(self, client, poll_service, begin, end):
         results = client.poll(self.collection, uri=poll_service, begin_date=begin, end_date=end)
         LOG.info('{} - polling {} from {!r} to {!r}'.format(self.name, poll_service, begin, end))
