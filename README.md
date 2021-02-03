@@ -7,7 +7,7 @@ Cabby relies on pytz>=2017.2 and libtaxii>=1.1.111, which don't match the versio
 2) Go to the Admin tab
 3) Click Extensions(left sidebar)
 4) Click git and enter this repository
-5) Select latest version
+5) Select latest version. NOTE: sometimes the version is not displayed. Just type the mmcabby version(v1.0) and press enter.
 6) Restart MineMeld: service minemeld restart
 # Parameters
 The following parameters can be specified:
