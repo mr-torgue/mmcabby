@@ -10,6 +10,17 @@ mmcabby should work for all types of minemeld installations. This includes docke
 4) Click git and enter this repository
 5) Select latest release version (v1.0.1). NOTE: sometimes the version is not displayed. Just type the mmcabby version(v1.0.1) and press enter.
 6) Restart MineMeld: service minemeld restart OR for docker: docker restart minemeld
+# Usage/tutorial
+mmcabby comes with 1 new prototype which can be used to create more prototypes. Go to minemeld->config. Click "browse prototypes", the symbol in the lower left corner. Search for the prototype myphishtank and click it. It shows this:
+
+Click on new to create a new prototype. For example if you want to get the abuse.ch collection from hail a taxii:
+* click create
+* change guest.phishtank_com to guest.Abuse_ch
+* [optional] add tags, change the name, or add authentication. For other streams these might be necessary. Parameters are explained below.
+* click ok
+
+Click on clone to add a new node with this prototype. Change name and click ok. Click on commit to activate the node.
+Verify by going to the nodes tab and check if indicators are coming in.
 # Parameters
 The following parameters can be specified:
 * discovery_service: URL where the discovery service is located.
