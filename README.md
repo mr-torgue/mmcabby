@@ -11,7 +11,7 @@ mmcabby should work for all types of minemeld installations. This includes docke
 5) Select latest release version (v1.0.1). NOTE: sometimes the version is not displayed. Just type the mmcabby version(v1.0.1) and press enter.
 6) Restart MineMeld: service minemeld restart OR for docker: docker restart minemeld
 # Usage/tutorial
-mmcabby comes with 1 new prototype which can be used to create more prototypes. Go to minemeld->config. Click "browse prototypes", the symbol in the lower left corner. Search for the prototype myphishtank and click it. It shows this:
+mmcabby comes with 1 new prototype which can be used to create more prototypes. Go to minemeld->config. Click "browse prototypes", the symbol in the lower left corner. Search for the prototype myphishtank and click it. 
 
 Click on new to create a new prototype. For example if you want to get the abuse.ch collection from hail a taxii:
 * click create
