@@ -21,3 +21,4 @@ prototypes:
             use_https: False
             username: guest
             password: guest
+            port: 80
