@@ -21,7 +21,7 @@ setup(
     version=_metadata['version'],
     author=_metadata['author'],
     author_email=_metadata['author_email'],
-    dependency_links=['https://github.com/eclecticiq/cabby/archive/0.1.8.tar.gz'],
+    dependency_links=['https://github.com/eclecticiq/cabby/archive/0.1.8.zip'],
     description=_metadata['description'],
     classifiers=[
         'Framework :: MineMeld',
