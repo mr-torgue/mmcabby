@@ -33,7 +33,6 @@ setup(
     packages=find_packages(),
     provides=find_packages(),
     install_requires=_requirements,
-    dependency_links=['https://github.com/eclecticiq/cabby/archive/0.1.8.zip'],
     package_data={
         '': [
                 'prototypes/*.yml',
